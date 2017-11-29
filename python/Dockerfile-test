@@ -1,0 +1,14 @@
+FROM python:3.6
+
+ENV PYTHONUNBUFFERED 1
+
+RUN mkdir /code
+WORKDIR /code
+
+ADD eth eth
+ADD setup.py .
+
+RUN pip install -e .
+
+ADD requirements-test.txt /code/
+RUN pip install -r requirements-test.txt

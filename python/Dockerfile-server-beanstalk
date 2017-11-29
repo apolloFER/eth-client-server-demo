@@ -1,0 +1,15 @@
+FROM python:3.6
+
+ENV PYTHONUNBUFFERED 1
+
+RUN mkdir /code
+WORKDIR /code
+
+ADD eth eth
+ADD setup.py .
+
+RUN pip install -e .
+
+EXPOSE 8888
+
+CMD eth server --host 0.0.0.0 --port 8888 --use-redis --redis-host eth-redis.ronic.co --redis-port 6379 --redis-db 0 --use-mysql --mysql-host eth-mysql.ronic.co --mysql-user eth_user --mysql-pass eth_password --mysql-db eth

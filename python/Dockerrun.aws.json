@@ -1,0 +1,17 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "eth-server-python",
+      "image": "your-ecs-registry.dkr.ecr.us-east-1.amazonaws.com/eth-server-python:latest",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 8888,
+          "containerPort": 8888
+        }
+      ]
+    }
+  ]
+}

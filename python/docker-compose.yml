@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: eth_root_password
+      MYSQL_DATABASE: eth
+      MYSQL_USER: eth_user
+      MYSQL_PASSWORD: eth_password
+    ports:
+      - 3306
+  redis:
+    image: redis
+    ports:
+      - 6379
+  server:
+    build: .
+    command: >
+      eth --wait 5
+      server --host 0.0.0.0 --port 8888
+      --use-redis --redis-host redis --redis-port 6379 --redis-db 0
+      --use-mysql --mysql-host mysql --mysql-user eth_user --mysql-pass eth_password --mysql-db eth
+    depends_on:
+      - mysql
+      - redis
+    links:
+      - mysql
+      - redis
+  client:
+    build: .
+    links:
+      - server
+    command: eth --wait 6 client --host server --port 8888
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile-test
+    command: pytest

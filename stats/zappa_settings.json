@@ -1,0 +1,14 @@
+{
+  "production": {
+    "app_function": "stats.app",
+    "aws_region": "us-east-1",
+    "profile_name": "default",
+    "project_name": "stats",
+    "runtime": "python3.6",
+    "s3_bucket": "eth-stats-lambda",
+    "environment_variables": {
+      "REDIS_HOST": "eth-redis.ronic.co",
+      "MYSQL_HOST": "eth-mysql.ronic.co"
+    }
+  }
+}

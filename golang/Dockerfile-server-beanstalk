@@ -1,0 +1,11 @@
+FROM golang:1.8
+
+WORKDIR /go/src/eth
+COPY eth/ .
+
+RUN go-wrapper download   # "go get -d -v ./..."
+RUN go-wrapper install    # "go install -v ./..."
+
+EXPOSE 8888
+
+CMD go-wrapper run server --host 0.0.0.0 --port 8888 --use-redis --redis-host eth-redis.ronic.co --redis-port 6379 --redis-db 0 --use-mysql --mysql-host eth-mysql.ronic.co --mysql-user eth_user --mysql-pass eth_password --mysql-db eth

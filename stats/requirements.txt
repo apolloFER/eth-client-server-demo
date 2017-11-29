@@ -1,0 +1,6 @@
+Flask
+zappa
+PyMySQL
+SQLAlchemy
+redis
+tabulate
